@@ -228,6 +228,7 @@ body {
 .card-title[contenteditable="true"] {
   outline: none;
   cursor: text;
+  user-select: text;
   border-radius: 3px;
   background: rgba(0,0,0,0.03);
   padding: 1px 3px;
