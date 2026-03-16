@@ -42,6 +42,29 @@
       state[key] = Array.from(cell.querySelectorAll('.card')).map(cardToData);
     });
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    showSavedToast();
+  }
+
+  function showSavedToast() {
+    let toast = document.getElementById('save-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'save-toast';
+      toast.textContent = 'Saved';
+      Object.assign(toast.style, {
+        position: 'fixed', bottom: '18px', right: '18px',
+        background: '#1c1917', color: '#fff',
+        fontSize: '10px', fontFamily: "'DM Sans', sans-serif",
+        fontWeight: '600', padding: '6px 12px',
+        borderRadius: '6px', opacity: '0',
+        transition: 'opacity 0.2s', pointerEvents: 'none',
+        zIndex: '200',
+      });
+      document.body.appendChild(toast);
+    }
+    clearTimeout(toast._timer);
+    toast.style.opacity = '1';
+    toast._timer = setTimeout(() => { toast.style.opacity = '0'; }, 1200);
   }
 
   function loadBoard() {
@@ -265,6 +288,9 @@
     });
 
     updateCounts();
+    // Always persist the current state on load (captures seed data on first visit,
+    // re-confirms restored state on subsequent visits)
+    saveBoard();
   }
 
   document.addEventListener('DOMContentLoaded', init);
