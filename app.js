@@ -1,6 +1,8 @@
 (() => {
   'use strict';
 
+  const STORAGE_KEY = 'planning-board-v1';
+
   const LANE_NAMES = {
     obj1: 'Sales Process & Methodology',
     obj2: 'Partner GTM & Growth Execution',
@@ -21,6 +23,81 @@
   let dragId = null;
   let cardCounter = 1000;
   let pendingCell = null;
+
+  // ── PERSISTENCE ──
+
+  function cardToData(card) {
+    return {
+      id: card.id,
+      title: card.querySelector('.card-title').textContent,
+      note: card.querySelector('.card-note')?.textContent ?? null,
+      bonusLabel: card.querySelector('.bonus-tag')?.textContent ?? null,
+    };
+  }
+
+  function saveBoard() {
+    const state = {};
+    document.querySelectorAll('.cell').forEach(cell => {
+      const key = `${cell.dataset.lane}_${cell.dataset.col}`;
+      state[key] = Array.from(cell.querySelectorAll('.card')).map(cardToData);
+    });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  function loadBoard() {
+    let state;
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      state = JSON.parse(raw);
+    } catch {
+      return false;
+    }
+
+    document.querySelectorAll('.cell').forEach(cell => {
+      const key = `${cell.dataset.lane}_${cell.dataset.col}`;
+      if (!state[key]) return;
+      // Remove seed cards from HTML
+      cell.querySelectorAll('.card').forEach(c => c.remove());
+      // Restore saved cards
+      const addBtn = cell.querySelector('.cell-add-btn');
+      state[key].forEach(data => {
+        const card = createCardElement(data);
+        if (addBtn) cell.insertBefore(card, addBtn);
+        else cell.appendChild(card);
+      });
+    });
+    return true;
+  }
+
+  // Sync cardCounter so new IDs never collide with restored ones
+  function syncCounter() {
+    document.querySelectorAll('.card[id^="card-"]').forEach(card => {
+      const n = parseInt(card.id.slice(5), 10);
+      if (n >= cardCounter) cardCounter = n + 1;
+    });
+  }
+
+  // ── CARD FACTORY ──
+
+  function createCardElement(data) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.draggable = true;
+    card.id = data.id;
+    card.innerHTML = `
+      <div class="card-accent"></div>
+      <button class="card-delete" title="Remove">&#x2715;</button>
+      <div class="card-title">${escapeHtml(data.title)}</div>
+      ${data.note       ? `<div class="card-note">${escapeHtml(data.note)}</div>` : ''}
+      ${data.bonusLabel ? `<div class="bonus-tag">${escapeHtml(data.bonusLabel)}</div>` : ''}
+    `;
+    card.addEventListener('dragstart', onDragStart);
+    card.querySelector('.card-delete').addEventListener('click', function () {
+      deleteCard(this);
+    });
+    return card;
+  }
 
   // ── DRAG & DROP ──
 
@@ -53,6 +130,7 @@
       else e.currentTarget.appendChild(card);
     }
     dragId = null;
+    saveBoard();
     updateCounts();
   }
 
@@ -67,7 +145,11 @@
     card.style.transition = 'opacity 0.15s, transform 0.15s';
     card.style.opacity = '0';
     card.style.transform = 'scale(0.92)';
-    setTimeout(() => { card.remove(); updateCounts(); }, 150);
+    setTimeout(() => {
+      card.remove();
+      saveBoard();
+      updateCounts();
+    }, 150);
   }
 
   // ── ADD MODAL ──
@@ -93,20 +175,11 @@
     if (!title || !pendingCell) return;
     const isBonus = document.getElementById('modal-bonus-check').checked;
     cardCounter++;
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.draggable = true;
-    card.id = `card-${cardCounter}`;
-    card.innerHTML = `
-      <div class="card-accent"></div>
-      <button class="card-delete" title="Remove">&#x2715;</button>
-      <div class="card-title">${escapeHtml(title)}</div>
-      ${isBonus ? '<div class="bonus-tag">&#x2B50; Bonus</div>' : ''}
-    `;
-    // Wire up new card events
-    card.addEventListener('dragstart', onDragStart);
-    card.querySelector('.card-delete').addEventListener('click', function () {
-      deleteCard(this);
+    const card = createCardElement({
+      id: `card-${cardCounter}`,
+      title,
+      note: null,
+      bonusLabel: isBonus ? '⭐ Bonus' : null,
     });
 
     const addBtn = pendingCell.querySelector('.cell-add-btn');
@@ -122,6 +195,7 @@
     });
 
     closeModal();
+    saveBoard();
     updateCounts();
   }
 
@@ -153,15 +227,17 @@
     });
   }
 
-  // ── INIT: wire up all existing elements ──
+  // ── INIT ──
 
   function init() {
-    // Cards: drag
+    // Restore saved state (replaces seed cards from HTML if found)
+    loadBoard();
+    syncCounter();
+
+    // Cards: drag + delete
     document.querySelectorAll('.card[draggable]').forEach(card => {
       card.addEventListener('dragstart', onDragStart);
     });
-
-    // Cards: delete
     document.querySelectorAll('.card-delete').forEach(btn => {
       btn.addEventListener('click', function () { deleteCard(this); });
     });
@@ -181,11 +257,9 @@
     // Modal controls
     document.getElementById('modal-cancel').addEventListener('click', closeModal);
     document.getElementById('modal-confirm').addEventListener('click', confirmAdd);
-
     document.getElementById('modal-overlay').addEventListener('click', function (e) {
       if (e.target === this) closeModal();
     });
-
     document.getElementById('modal-input').addEventListener('keydown', function (e) {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); confirmAdd(); }
     });
