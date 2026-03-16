@@ -54,7 +54,7 @@
       Object.assign(toast.style, {
         position: 'fixed', bottom: '18px', right: '18px',
         background: '#1c1917', color: '#fff',
-        fontSize: '10px', fontFamily: "'DM Sans', sans-serif",
+        fontSize: '12px', fontFamily: "'DM Sans', sans-serif",
         fontWeight: '600', padding: '6px 12px',
         borderRadius: '6px', opacity: '0',
         transition: 'opacity 0.2s', pointerEvents: 'none',
