@@ -52,7 +52,7 @@ body {
 }
 
 .page-header-title h1 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   letter-spacing: -0.2px;
   line-height: 1.3;
@@ -79,7 +79,7 @@ body {
 .q-header:last-child { border-right: none; }
 
 .q-label {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 15px;
   letter-spacing: -0.2px;
 }
@@ -336,7 +336,7 @@ body {
 .modal-overlay.open .modal { transform: translateY(0); }
 
 .modal h2 {
-  font-family: 'DM Serif Display', serif;
+  font-family: 'DM Sans', sans-serif;
   font-size: 17px;
   margin-bottom: 4px;
   letter-spacing: -0.2px;
