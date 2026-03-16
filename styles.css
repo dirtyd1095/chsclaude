@@ -224,6 +224,16 @@ body {
 .card-title { font-weight: 500; line-height: 1.45; color: var(--text); }
 .card-note  { color: var(--muted); margin-top: 4px; font-style: italic; }
 
+.card.editing { box-shadow: 0 0 0 2px #a8a29e; cursor: default; }
+.card-title[contenteditable="true"] {
+  outline: none;
+  cursor: text;
+  border-radius: 3px;
+  background: rgba(0,0,0,0.03);
+  padding: 1px 3px;
+  margin: -1px -3px;
+}
+
 .bonus-tag {
   display: inline-flex;
   align-items: center;

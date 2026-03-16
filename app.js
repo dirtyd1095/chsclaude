@@ -119,7 +119,71 @@
     card.querySelector('.card-delete').addEventListener('click', function () {
       deleteCard(this);
     });
+    card.addEventListener('dblclick', function (e) {
+      startEditing(this);
+      e.stopPropagation();
+    });
     return card;
+  }
+
+  // ── INLINE EDIT ──
+
+  function startEditing(card) {
+    const titleEl = card.querySelector('.card-title');
+    if (titleEl.contentEditable === 'true') return; // already editing
+
+    const original = titleEl.textContent;
+    card.draggable = false;
+    card.classList.add('editing');
+    titleEl.contentEditable = 'true';
+    titleEl.focus();
+
+    // Select all text
+    const range = document.createRange();
+    range.selectNodeContents(titleEl);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+
+    function commit() {
+      const text = titleEl.textContent.trim();
+      titleEl.contentEditable = 'false';
+      card.draggable = true;
+      card.classList.remove('editing');
+      if (text) {
+        titleEl.textContent = text;
+        saveBoard();
+      } else {
+        titleEl.textContent = original; // revert if cleared
+      }
+    }
+
+    function cancel() {
+      titleEl.contentEditable = 'false';
+      card.draggable = true;
+      card.classList.remove('editing');
+      titleEl.textContent = original;
+    }
+
+    titleEl.addEventListener('keydown', function onKey(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        titleEl.removeEventListener('keydown', onKey);
+        titleEl.removeEventListener('blur', onBlur);
+        commit();
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        titleEl.removeEventListener('keydown', onKey);
+        titleEl.removeEventListener('blur', onBlur);
+        cancel();
+      }
+    });
+
+    function onBlur() {
+      titleEl.removeEventListener('blur', onBlur);
+      commit();
+    }
+    titleEl.addEventListener('blur', onBlur);
   }
 
   // ── DRAG & DROP ──
@@ -257,9 +321,13 @@
     loadBoard();
     syncCounter();
 
-    // Cards: drag + delete
+    // Cards: drag, delete, edit
     document.querySelectorAll('.card[draggable]').forEach(card => {
       card.addEventListener('dragstart', onDragStart);
+      card.addEventListener('dblclick', function (e) {
+        startEditing(this);
+        e.stopPropagation();
+      });
     });
     document.querySelectorAll('.card-delete').forEach(btn => {
       btn.addEventListener('click', function () { deleteCard(this); });
