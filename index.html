@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026–2027 Planning Board — Dana</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-header">
+    <div class="page-header-title">
+      <h1>2026–2027<br>Planning Board</h1>
+      <p>Sales Ops &amp; Enablement</p>
+    </div>
+    <div class="q-headers">
+      <div class="q-header q-unassigned">
+        <span class="q-label">In Flight</span>
+        <span class="q-dates">Active · Unassigned</span>
+        <span class="q-count" id="hcount-unassigned"></span>
+      </div>
+      <div class="q-header q-q2">
+        <span class="q-label">Q2 2026</span>
+        <span class="q-dates">April — June</span>
+        <span class="q-count" id="hcount-q2"></span>
+      </div>
+      <div class="q-header q-q3">
+        <span class="q-label">Q3 2026</span>
+        <span class="q-dates">July — September</span>
+        <span class="q-count" id="hcount-q3"></span>
+      </div>
+      <div class="q-header q-q4">
+        <span class="q-label">Q4 2026</span>
+        <span class="q-dates">October — December</span>
+        <span class="q-count" id="hcount-q4"></span>
+      </div>
+      <div class="q-header q-q1next">
+        <span class="q-label">Q1 2027</span>
+        <span class="q-dates">January — March</span>
+        <span class="q-count" id="hcount-q1next"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="board">
+    <!-- OBJ 1 -->
+    <div class="swimlane obj1">
+      <div class="lane-label">
+        <span class="lane-num">Obj 01</span>
+        <span class="lane-title">Sales Process &amp; Methodology</span>
+        <span class="lane-count" id="lcount-obj1"></span>
+      </div>
+      <div class="cell unassigned-cell" data-lane="obj1" data-col="unassigned">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj1" data-col="q2">
+        <div class="card" draggable="true" id="c-sales-stages">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Sales stage redesign and process documentation</div>
+        </div>
+        <div class="card" draggable="true" id="c-mh-scorecard">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Miller Heiman scorecard integration into BD process</div>
+          <div class="bonus-tag">&#x2B50; Q2 Bonus</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj1" data-col="q3">
+        <div class="card" draggable="true" id="c-mh-sheets">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Miller Heiman Blue/Green/Yellow sheet rollout</div>
+          <div class="bonus-tag">&#x2B50; Q3 Bonus</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj1" data-col="q4">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj1" data-col="q1next">
+        <div class="card" draggable="true" id="c-bd-workflow">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">BD workflow adoption reinforcement and measurement</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+    </div>
+
+    <!-- OBJ 2 -->
+    <div class="swimlane obj2">
+      <div class="lane-label">
+        <span class="lane-num">Obj 02</span>
+        <span class="lane-title">Partner GTM &amp; Growth Execution</span>
+        <span class="lane-count" id="lcount-obj2"></span>
+      </div>
+      <div class="cell unassigned-cell" data-lane="obj2" data-col="unassigned">
+        <div class="card" draggable="true" id="c-mls">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">MLS data prospecting journeys — email &amp; calling</div>
+        </div>
+        <div class="card" draggable="true" id="c-re-rfp">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Real estate strategic partnership RFP</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj2" data-col="q2">
+        <div class="card" draggable="true" id="c-gtm-framework">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">GTM strategy framework — scoping, planning, launch sequencing</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj2" data-col="q3">
+        <div class="card" draggable="true" id="c-onboarding-playbook">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">New partner onboarding playbook</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj2" data-col="q4">
+        <div class="card" draggable="true" id="c-funnel-opt">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Partner funnel optimization with digital team</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj2" data-col="q1next">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+    </div>
+
+    <!-- OBJ 3 -->
+    <div class="swimlane obj3">
+      <div class="lane-label">
+        <span class="lane-num">Obj 03</span>
+        <span class="lane-title">Revenue Intelligence &amp; Reporting</span>
+        <span class="lane-count" id="lcount-obj3"></span>
+      </div>
+      <div class="cell unassigned-cell" data-lane="obj3" data-col="unassigned">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj3" data-col="q2">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj3" data-col="q3">
+        <div class="card" draggable="true" id="c-exec-dash">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Exec visibility dashboard — pipeline, actuals, forecast</div>
+          <div class="bonus-tag">&#x2B50; Q3 Bonus</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj3" data-col="q4">
+        <div class="card" draggable="true" id="c-reporting-access">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Reporting accessibility and self-service rollout</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj3" data-col="q1next">
+        <div class="card" draggable="true" id="c-team-dash">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Team-level reporting dashboards — pipeline, performance</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+    </div>
+
+    <!-- OBJ 4 -->
+    <div class="swimlane obj4">
+      <div class="lane-label">
+        <span class="lane-num">Obj 04</span>
+        <span class="lane-title">Technology Enablement &amp; Automation</span>
+        <span class="lane-count" id="lcount-obj4"></span>
+      </div>
+      <div class="cell unassigned-cell" data-lane="obj4" data-col="unassigned">
+        <div class="card" draggable="true" id="c-hubspot">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Landing page migration to HubSpot</div>
+          <div class="card-note">November deadline</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj4" data-col="q2">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj4" data-col="q3">
+        <div class="card" draggable="true" id="c-sf-arch">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Salesforce architecture optimization and workflow automation</div>
+          <div class="bonus-tag">&#x2B50; Q3 Bonus</div>
+        </div>
+        <div class="card" draggable="true" id="c-omni">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Omni-channel automation pilots</div>
+          <div class="bonus-tag">&#x2B50; Q3 Bonus</div>
+        </div>
+        <div class="card" draggable="true" id="c-ai-strategy">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">AI strategy and use case development — BD, AM, ops</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj4" data-col="q4">
+        <div class="card" draggable="true" id="c-ai-pilot">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">AI tooling pilot deployment — BD prospecting or AM retention</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj4" data-col="q1next">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+    </div>
+
+    <!-- OBJ 5 -->
+    <div class="swimlane obj5">
+      <div class="lane-label">
+        <span class="lane-num">Obj 05</span>
+        <span class="lane-title">Operational Excellence &amp; Program Mgmt</span>
+        <span class="lane-count" id="lcount-obj5"></span>
+      </div>
+      <div class="cell unassigned-cell" data-lane="obj5" data-col="unassigned">
+        <div class="card" draggable="true" id="c-dts">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">DTS partner onboarding — ADT, Reggora, LendersOne</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj5" data-col="q2">
+        <div class="card" draggable="true" id="c-pm-standards">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">PM process standards and tooling — Jira, intake, prioritization</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj5" data-col="q3">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj5" data-col="q4">
+        <div class="card" draggable="true" id="c-xf-mgmt">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Cross-functional initiative management framework</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj5" data-col="q1next">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+    </div>
+
+    <!-- OBJ 6 -->
+    <div class="swimlane obj6">
+      <div class="lane-label">
+        <span class="lane-num">Obj 06</span>
+        <span class="lane-title">Team &amp; Org Leadership</span>
+        <span class="lane-count" id="lcount-obj6"></span>
+      </div>
+      <div class="cell unassigned-cell" data-lane="obj6" data-col="unassigned">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj6" data-col="q2">
+        <div class="card" draggable="true" id="c-360">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">360° performance review process</div>
+          <div class="bonus-tag">&#x2B50; Q2 Bonus</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj6" data-col="q3">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj6" data-col="q4">
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+      <div class="cell" data-lane="obj6" data-col="q1next">
+        <div class="card" draggable="true" id="c-coaching">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Coaching, development, and performance culture buildout</div>
+        </div>
+        <div class="card" draggable="true" id="c-salesops-structure">
+          <div class="card-accent"></div>
+          <button class="card-delete" title="Remove">&#x2715;</button>
+          <div class="card-title">Sales Ops team structure, roles, and accountability framework</div>
+        </div>
+        <button class="cell-add-btn" data-add>+ Add initiative</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ADD MODAL -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal">
+      <h2>Add Initiative</h2>
+      <p class="modal-context" id="modal-context"></p>
+      <label for="modal-input">Initiative title</label>
+      <textarea id="modal-input" rows="3" placeholder="Describe the initiative…"></textarea>
+      <label class="modal-bonus">
+        <input type="checkbox" id="modal-bonus-check"> Mark as bonus deliverable
+      </label>
+      <div class="modal-actions">
+        <button class="btn btn-cancel" id="modal-cancel">Cancel</button>
+        <button class="btn btn-add" id="modal-confirm">Add card</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
